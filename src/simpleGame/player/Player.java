@@ -1,38 +1,46 @@
 package simpleGame.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 import org.lwjgl.opengl.GL11.*;
 
+import simpleGame.cannon.Cannon;
 import static org.lwjgl.opengl.GL11.*;
 import static simpleGame.settings.PlayerSettings.*;
-public class Player extends GameObject{
+import static simpleGame.settings.CannonSettings.*;
 
-	private int[] cannonXLocs; 
-	private int[] cannonYLocs;
+public class Player extends PlayerObject{
+
+	private Cannon[] cannons;
 	private int numberOfCannons;
 	public Player(int x, int y, int angle) {
 		super(x, y, angle);
-		initCannonLocs();
+		
+		initCannons();
+		
 	}
-	private void initCannonLocs() {
-		numberOfCannons = CANNON_MAX_NUMBER;
+	private void initCannons() {
+		numberOfCannons = CANNON_DEFAULT_NUMBER;
+		cannons = new Cannon[CANNON_MAX_NUMBER];
 		for(int i = 0; i < numberOfCannons; i++){
-			cannonXLocs[i] = CANNON_DEFAULT_XLOCS[i];
-		}
-		for(int i = 0; i < numberOfCannons; i++){
-			cannonYLocs[i] = CANNON_DEFAULT_YLOCS[i];
+			cannons[i] = new Cannon(CANNON_DEFAULT_XOFFSETS[i], CANNON_DEFAULT_YOFFSETS[i], getAngle(), 0, false);
+			
 		}
 	}
 	@Override
 	public void draw(){
 		drawPlayer();
 	}
+	private void drawCannons() {
+		for(int i = 0; i < numberOfCannons; i++){
+			cannons[i].draw();
+		}
+		
+	}
 	private void drawPlayer() {
 		glPushMatrix();
-		glTranslatef(getX() + (float)PWIDTH/2,getY() + (float)PHEIGHT/2 ,0);
+		glColor3f(1f, 1f, 1f);
+		glTranslatef(getX(), getY(),0);
 		
 		glRotatef(getAngle(),0,0,1);
 		
@@ -44,15 +52,24 @@ public class Player extends GameObject{
 			glVertex2f(PWIDTH, 0);
 			
 		glEnd();
+		drawCannons();
 		glPopMatrix();
 	}
 	public void update(){
 		moveVert();
+		updateCannons();
+		
 	}
 	
+	private void updateCannons() {
+		for(int i = 0; i < numberOfCannons; i++){
+			cannons[i].updatePos(getX(), getY(), getAngle());
+		}
+		
+	}
 	public void fire(){
 		for(int i = 0; i < numberOfCannons; i++){
-			
+			cannons[i].fire();
 		}
 	}
 }

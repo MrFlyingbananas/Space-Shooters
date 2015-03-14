@@ -2,10 +2,10 @@ package simpleGame.player;
 
 import static simpleGame.settings.WindowSettings.*;
 import static simpleGame.settings.PlayerSettings.*;
-public abstract class GameObject {
+public abstract class PlayerObject {
 	private float x, y, angle, speed;
 	
-	public GameObject(float x, float y, float baseAngle){
+	public PlayerObject(float x, float y, float baseAngle){
 		this.x = x;
 		this.y = y;
 		this.angle = baseAngle;
@@ -42,11 +42,8 @@ public abstract class GameObject {
 		}else{
 			y+=yInc;
 		}
-		System.out.println("xInc: "+xInc);
-		System.out.println("yInc: "+ yInc);
-		System.out.println("R: "+angle);
 	}
-	protected void moveHorz(){
+	protected void dash(int dir){
 
 		float xInc = (float) Math.sin(angle)*speed;
 		float yInc = (float) Math.cos(angle)*speed;
@@ -98,4 +95,5 @@ public abstract class GameObject {
 	public float getSpeed() {
 		return speed;
 	}
+	
 }

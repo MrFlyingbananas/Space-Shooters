@@ -7,15 +7,15 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11.*;
 
-import simpleGame.player.AIPlayer;
-import simpleGame.player.GameObject;
+import simpleGame.player.AIPlayer_MULTIPLAYER_TODO;
+import simpleGame.player.PlayerObject;
 import simpleGame.player.Player;
 import static org.lwjgl.opengl.GL11.*;
 import static simpleGame.settings.WindowSettings.*;
 public class GameLoop {
 	
-	private GameObject player;
-	private GameObject ai;
+	private PlayerObject player;
+	private PlayerObject ai;
 	
 	public GameLoop(){
 		initWindow();
@@ -27,8 +27,7 @@ public class GameLoop {
 		destroy();
 	}
 	private void initVars() {
-		player = new Player(10,HEIGHT/2, 270);
-		ai = new AIPlayer(WIDTH-10,HEIGHT/2, 90);
+		player = new Player(60,HEIGHT/2, 0);
 		
 	}
 	
