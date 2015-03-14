@@ -27,7 +27,7 @@ public class GameLoop {
 		destroy();
 	}
 	private void initVars() {
-		player = new Player(60,HEIGHT/2, 0);
+		player = new Player(WIDTH/2,HEIGHT/2, 0);
 		
 	}
 	
@@ -76,7 +76,7 @@ public class GameLoop {
 		}else if(Keyboard.isKeyDown(Keyboard.KEY_D)){
 			player.rotate(-2f);
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 			((Player)player).fire();
 		}
 		

@@ -27,18 +27,18 @@ public abstract class PlayerObject {
 	public void moveVert(){
 		float xInc = (float) Math.sin(Math.toRadians(angle))*speed;
 		float yInc = -((float) Math.cos(Math.toRadians(angle))*speed);
-		if(x + xInc > WIDTH){
-			x = WIDTH;
-		}else if(x + xInc < 0){
-			x = 0;
+		if(x + xInc + PWIDTH/2> WIDTH){
+			x = WIDTH - PWIDTH/2;
+		}else if(x + xInc - PWIDTH/2< 0){
+			x = 0 + PWIDTH/2 ;
 		}else{
 			x+=xInc;
 		}
 		
-		if(y + yInc > HEIGHT){
-			y = HEIGHT;
-		}else if(y + yInc < 0){
-			y = 0;
+		if(y + yInc + PHEIGHT/2> HEIGHT){
+			y = HEIGHT - PHEIGHT/2;
+		}else if(y + yInc - PWIDTH/2< 0){
+			y = 0+ PHEIGHT/2;
 		}else{
 			y+=yInc;
 		}
