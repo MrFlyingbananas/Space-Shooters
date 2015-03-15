@@ -23,7 +23,7 @@ public class Player extends PlayerObject{
 		numberOfCannons = CANNON_DEFAULT_NUMBER;
 		cannons = new Cannon[CANNON_MAX_NUMBER];
 		for(int i = 0; i < numberOfCannons; i++){
-			cannons[i] = new Cannon(CANNON_DEFAULT_XOFFSETS[i], CANNON_DEFAULT_YOFFSETS[i], getAngle(), 0, false);
+			cannons[i] = new Cannon(CANNON_DEFAULT_XOFFSETS[i], CANNON_DEFAULT_YOFFSETS[i], getAngle(), 0, false, false);
 			
 		}
 	}
@@ -63,7 +63,7 @@ public class Player extends PlayerObject{
 	
 	private void updateCannons() {
 		for(int i = 0; i < numberOfCannons; i++){
-			cannons[i].updatePos(getX(), getY(), getAngle());
+			cannons[i].update(getX(), getY(), getAngle());
 		}
 		
 	}

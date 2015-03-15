@@ -2,10 +2,12 @@ package simpleGame.cannon;
 
 import static org.lwjgl.opengl.GL11.*;
 import static simpleGame.settings.CannonSettings.*;
+import simpleGame.missle.Laser;
+import simpleGame.settings.MissleSettings;
 import simpleGame.settings.PlayerSettings;
 public class Cannon extends CannonObject{
-	public Cannon(float xPosOnShip, float yPosOnShip, float baseAngle, int cannonType, boolean isDisabled) {
-		super(xPosOnShip, yPosOnShip, baseAngle, cannonType, isDisabled);
+	public Cannon(float xPosOnShip, float yPosOnShip, float baseAngle, int cannonType, boolean isReloading, boolean isDisabled) {
+		super(xPosOnShip, yPosOnShip, baseAngle, cannonType, isReloading, isDisabled);
 	
 	}
 	
@@ -23,9 +25,12 @@ public class Cannon extends CannonObject{
 
 
 
-
+	@Override
 	public void fire() {
-		System.out.println("PEW!");
+		if(!isReloading()){
+			new Laser(getX() + CANNON_WIDTH, getY() + CANNON_HEIGHT, getAngle(), MissleSettings.MISSLETYPE_LASER);
+			reload();
+		}
 		
 	}
 
